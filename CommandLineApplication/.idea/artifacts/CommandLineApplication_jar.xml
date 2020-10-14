@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CommandLineApplication:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/CommandLineApplication_jar</output-path>
+    <root id="archive" name="CommandLineApplication.jar">
+      <element id="module-output" name="CommandLineApplication" />
+    </root>
+  </artifact>
+</component>
