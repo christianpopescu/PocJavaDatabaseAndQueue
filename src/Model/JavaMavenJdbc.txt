@@ -1,0 +1,91 @@
+package com.christian;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class Main {
+
+    public static void main(String[] args) {
+       System.out.println("Hello world!");
+        String connString="jdbc:oracle:thin:user/password@host:port/oraclesid";
+        try
+        {
+            Connection conn = DriverManager.getConnection(connString);
+            System.out.println("Connection Done!");
+            String query ="select * from coffee";
+            try (Statement stmt = conn.createStatement()) {
+                ResultSet rs = stmt.executeQuery(query);
+                while (rs.next()) {
+                    String coffeeName = rs.getString("KEY_ID");
+                    String supplierID = rs.getString("VALUE");
+                    System.out.println(coffeeName + ", " + supplierID );
+                }
+            } catch (SQLException se) {
+                System.out.println(se.getMessage());
+            }
+
+            conn.close();
+        }
+        catch (SQLException se)
+        {
+            System.out.println(se.getMessage());
+
+        }
+
+
+    }
+}
+
+pom.xml 
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.christian.sandboxjdbc</groupId>
+    <artifactId>temp</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <dependencies>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>11.2.0.3</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>7</source>
+                    <target>7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    
+</project>
+
+Manifest file in \src\main\resources\META-INF
+
+
+
+Manifest-Version: 1.0
+Main-Class: com.christian.Main
