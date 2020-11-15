@@ -14,27 +14,5 @@ public class SqlRunner {
     {
         dataSource = pDataSource;
     }
-
-    // method to delete
-    public void test()
-    {
-        try (Connection conn = dataSource.getConnection())
-        {
-            String command = "select * from person";
-            PreparedStatement statement = conn.prepareStatement(command);
-            ResultSet rs = statement.executeQuery();
-            while (rs.next())
-            {
-                System.out.println(rs.getString(1));
-            }
-
-        }
-        catch (SQLException se)
-        {
-            System.out.println("Sql Exception: " + se.getMessage());
-
-        }
-    }
-
-
+    private SqlRunner() {}
 }
