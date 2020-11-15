@@ -20,7 +20,7 @@ public class SqlRunner {
     {
         try (Connection conn = dataSource.getConnection())
         {
-            String command = "select * from USER_TABLES";
+            String command = "select * from person";
             PreparedStatement statement = conn.prepareStatement(command);
             ResultSet rs = statement.executeQuery();
             while (rs.next())
