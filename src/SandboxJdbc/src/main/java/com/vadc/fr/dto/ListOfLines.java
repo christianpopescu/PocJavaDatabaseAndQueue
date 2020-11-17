@@ -5,11 +5,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static java.nio.file.StandardOpenOption.CREATE;
 
-public class ListOfLines {
+public class ListOfLines implements Iterable<String> {
     private List<String> linesList = new ArrayList<>();
 
     public ListOfLines(List<String> pListOfLines)
@@ -25,6 +26,11 @@ public class ListOfLines {
     public void setLinesList(List<String> pListOfLines)
     {
         linesList = pListOfLines;
+    }
+
+    public void add(String pLine)
+    {
+        linesList.add(pLine);
     }
 
     public void WriteToFile (String pFileName) throws IOException
@@ -54,5 +60,10 @@ public class ListOfLines {
                 linesList.add(line);
             }
         }
+    }
+
+    @Override
+    public Iterator<String> iterator() {
+        return linesList.iterator();
     }
 }
